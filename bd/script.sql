@@ -1,0 +1,31 @@
+CREATE TABLE clientes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    telefone VARCHAR(20) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL
+);
+
+CREATE TABLE pets (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    especie VARCHAR(50) NOT NULL,
+    raca VARCHAR(50),
+    cliente_id INTEGER NOT NULL,
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+);
+
+CREATE TABLE servicos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    preco DECIMAL(10,2) NOT NULL
+);
+
+CREATE TABLE agendamentos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    data DATE NOT NULL,
+    horario TIME NOT NULL,
+    pet_id INTEGER NOT NULL,
+    servico_id INTEGER NOT NULL,
+    FOREIGN KEY (pet_id) REFERENCES pets(id),
+    FOREIGN KEY (servico_id) REFERENCES servicos(id)
+);
